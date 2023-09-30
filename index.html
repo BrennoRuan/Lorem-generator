@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lorem-ipsum/1.0.5-lorem10.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <title>Gerador de Lorem</title>
+</head>
+<body>
+
+
+    <div class="navbar">
+        <a href="../pagina-1/index.html">Inicio</a>
+        <a href="../morse/codmorse.html">Codificar Morse</a>
+        <a href="../calculadora-juros/index.html">Calcular Juros</a>
+        <a href="../calcular-peri-area/index.html">Medição de Área</a>
+        <a href="../conversor-medidas/index.html">Coverter Medidas</a>
+        <a href="../gerador-senhas/index.html">Gerador de Senha</a>
+    </div>
+
+
+<!-- Seção para gerar "Lorem Ipsum" com funcionalidade de cópia -->
+<section>
+    <h2>Gerador de "Lorem Ipsum"</h2>
+    <label for="quantidadeParagrafos">Quantidade de Parágrafos:</label>
+    <input type="number" id="quantidadeParagrafos" placeholder="Digite a quantidade">
+    <button onclick="gerarLoremIpsum()">Gerar Texto</button>
+    <div id="loremIpsum"></div>
+</section>
+
+<script>
+    function gerarLoremIpsum() {
+        const quantidadeParagrafos = parseInt(document.getElementById('quantidadeParagrafos').value);
+
+        if (isNaN(quantidadeParagrafos) || quantidadeParagrafos <= 0) {
+            document.getElementById('loremIpsum').textContent = 'Por favor, insira uma quantidade válida.';
+            return;
+        }
+
+        const loremIpsumText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonummy tincidunt ut lacreet dolore magna aliguam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.";
+        let texto = '';
+
+        for (let i = 0; i < quantidadeParagrafos; i++) {
+            texto += `<p class="click-to-copy">${loremIpsumText}</p>`;
+        }
+
+        document.getElementById('loremIpsum').innerHTML = texto;
+
+        const copiarTextos = document.querySelectorAll('.click-to-copy');
+
+        copiarTextos.forEach((paragrafo) => {
+            paragrafo.addEventListener('click', () => copiarTexto(paragrafo));
+        });
+    }
+
+    function copiarTexto(elemento) {
+        const texto = elemento.innerText;
+
+        const textarea = document.createElement('textarea');
+        textarea.value = texto;
+
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        alert('Texto copiado para a área de transferência!');
+    }
+</script>
+
+</body>
+</html>
